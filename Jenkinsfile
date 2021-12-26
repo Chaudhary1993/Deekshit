@@ -11,7 +11,7 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'Sonar-Token') {
                         sh 'chmod +x gradlew'
-                        sh './gradlew sonarqube --stacktrace'
+                        sh './gradlew sonarqube -Dsonar.userHome=`pwd`/.sonar --stacktrace'
                      }
                 }
             }
