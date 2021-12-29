@@ -78,10 +78,10 @@ pipeline{
         stage('verifying app deployment'){
             steps{
                 script{
-                     withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
-                         sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myjavaapp-myapp:8080'
-
-                     }
+                     sh '''
+                     sleep 5m
+                     curl http://3.108.254.204:31102
+                     '''
                 }
             }
         }
