@@ -43,6 +43,7 @@ pipeline{
         stage ("Identify misconfigs with datree for helm"){
             steps{
                 script{
+                    sh 'helm plugin install https://github.com/datreeio/helm-datree'
                     dir('kubernetes/') {
                         sh 'helm datree test myapp/'
                     }
