@@ -64,6 +64,17 @@ pipeline{
                 }
             }
         }
+        stage('deploying on k8s cluster') {
+            steps {
+                script{
+                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+                        dir('kubernetes/') {
+                        sh 'helm upgrade --install --set image.repositry="65.2.4.99:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/'
+                    }
+                  }
+                }
+            }
+        }
     }
     post{
         always{
